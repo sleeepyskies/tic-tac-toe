@@ -13,12 +13,15 @@ game_init()
 
 # Main game loop
 while(game_active):
+    current_turn += 1
+
     # Print the current game board to console
     print_board(game_board, current_turn)
 
-    i, j = get_position(game_board)
+    row, column = get_position(game_board)
 
-    current_turn += 1
+    update_board(row, column, game_board, current_turn)
+
     game_active = not(game_over(game_board))
 
 game_end(current_turn)

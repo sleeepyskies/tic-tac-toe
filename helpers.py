@@ -47,11 +47,16 @@ def get_position(game_board: list[str]) -> tuple[int, int]:
 
     # Check if the position is valid
     if game_board[row * 3 + column] == " ":
-        return tuple[row, column]
+        return row, column
     else:
         print("This position is invalid! Ending the game :(")
         game_end(0)
 
+# Updates the board at the given position. Assumes the position is valid.
+# Infers the current player. 
+def update_board(row: int, column: int, game_board: list[str], round: int) -> None:
+    player = "X" if round % 2 == 0 else "O"
+    game_board[row * 3 + column] = player
 
 def game_over(board: list[str]) -> bool:
     return True
