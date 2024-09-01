@@ -8,6 +8,8 @@ game_active : bool = True
 current_turn : int = 0
 # Holds the board data
 game_board : list[str] = [" " for _ in range(9)]
+# Holds the winner of the game
+winner : str = ""
 
 game_init()
 
@@ -22,6 +24,7 @@ while(game_active):
 
     update_board(row, column, game_board, current_turn)
 
-    game_active = not(game_over(game_board))
+    game_active, winner = game_over(game_board)
 
-game_end(current_turn)
+print_board(game_board, current_turn)
+game_end(current_turn, winner)
