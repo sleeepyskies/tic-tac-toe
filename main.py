@@ -1,5 +1,7 @@
 from helpers import *
 
+import sys
+
 # Used to check if game is still active
 game_active = True
 # Determines current turn
@@ -11,4 +13,10 @@ game_init()
 
 # Main game loop
 while(game_active):
+
+
+
     game_active = game_over(game_board)
+
+game_end()
+sys.exit(0)
