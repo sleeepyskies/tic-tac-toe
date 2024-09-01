@@ -1,4 +1,5 @@
 import sys
+import typing
 
 win_indices = [
     (0, 1, 2),
@@ -12,6 +13,7 @@ win_indices = [
 ]
 
 # Initialises the game, explains the rules, and determines the gamemode
+# Returns an instance of the computer player if AI mode is selected, otherwise returns None
 def game_init() -> None:
     print("Welcome to console Tic Tac Toe!")
     print("Enter 1 to play against another player, and 2 to play against the computer.")
@@ -20,8 +22,10 @@ def game_init() -> None:
     match gamemode:
         case "1":
             print("Playing against another player! \n")
+            return None
         case "2":
             print("Playing against the computer! \n")
+            return 
         case _:
             print("I'm sorry, you havent entered a valid input :(, exiting the game...) \n")
             game_end(0, "")

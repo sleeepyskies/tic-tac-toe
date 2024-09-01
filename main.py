@@ -1,6 +1,7 @@
 from helpers import *
 
 import sys
+import typing
 
 # Used to check if game is still active
 game_active : bool = True

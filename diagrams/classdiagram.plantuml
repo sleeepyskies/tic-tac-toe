@@ -1,0 +1,36 @@
+@startuml Class diagram
+!theme mono
+
+class Game {
+    - playerX: Player
+    - playerO: Player
+    - board: Board
+    - current_round: int 
+    + init_game(): None
+    + play_game(): None
+}
+
+abstract class Player {
+    - team: str
+}
+
+class UserPlayer  {
+
+}
+
+class AIPlayer {
+
+}
+
+class Board {
+    - board: list[str]
+    + 
+}
+
+Game o-- Board 
+Game o-- Player
+
+Player <|-- UserPlayer
+Player <|-- AIPlayer
+
+@enduml
