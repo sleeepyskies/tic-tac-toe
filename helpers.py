@@ -46,7 +46,11 @@ def get_position(game_board: list[str]) -> tuple[int, int]:
         game_end(0)
 
     # Check if the position is valid
-    
+    if game_board[row * 3 + column] == " ":
+        return tuple[row, column]
+    else:
+        print("This position is invalid! Ending the game :(")
+        game_end(0)
 
 
 def game_over(board: list[str]) -> bool:

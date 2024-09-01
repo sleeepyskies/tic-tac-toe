@@ -18,7 +18,6 @@ while(game_active):
 
     i, j = get_position(game_board)
 
-
     current_turn += 1
     game_active = not(game_over(game_board))
 
