@@ -1,8 +1,4 @@
 class AIPlayer:
     """
-    Holds logic for the computer gamemode.
+    Represents a computer opponent. Holds the logic for the computers moveset.
     """
-
-    def make_move():
-        """aaa"""
-        pass
