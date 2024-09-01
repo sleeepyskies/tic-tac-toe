@@ -6,31 +6,30 @@ class Game {
     - playerO: Player
     - board: Board
     - current_round: int 
-    + init_game(): None
     + play_game(): None
+    + end_game(): None
 }
 
-abstract class Player {
+class Player {
     - team: str
-}
-
-class UserPlayer  {
-
+    + make_move(board: Board): None
 }
 
 class AIPlayer {
-
+    + make_move(board: Board): None
 }
 
 class Board {
     - board: list[str]
-    + 
+    + move_possible(): bool 
+    + place_move(i: int, j: int): bool
+    + game_over(): bool 
+    + get_winner(): str
 }
 
 Game o-- Board 
 Game o-- Player
 
-Player <|-- UserPlayer
 Player <|-- AIPlayer
 
 @enduml
