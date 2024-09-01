@@ -6,25 +6,30 @@ class Game {
     - playerO: Player
     - board: Board
     - current_round: int 
+    
     + play_game(): None
     + end_game(): None
 }
 
 class Player {
     - team: str
+
     + make_move(board: Board): None
 }
 
 class AIPlayer {
     + make_move(board: Board): None
+    + determine_move(board: Board): (int, int)
 }
 
 class Board {
     - board: list[str]
+
     + move_possible(): bool 
     + place_move(i: int, j: int): bool
     + game_over(): bool 
     + get_winner(): str
+    + print_board(): None
 }
 
 Game o-- Board 
