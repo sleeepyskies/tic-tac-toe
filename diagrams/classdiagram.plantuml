@@ -6,7 +6,8 @@ class Game {
     - playerO: Player
     - board: Board
     - current_round: int 
-    
+
+    + init_game(): None
     + play_game(): None
     + end_game(): None
 }
