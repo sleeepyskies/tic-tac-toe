@@ -1,4 +1,5 @@
-from player.Player import Player
+from player.AbstractPlayer import AbstractPlayer
+from player.HumanPlayer import HumanPlayer
 from player.AIPlayer import AIPlayer
 from board.Board import Board
 from utils.StringHolder import StringHolder
@@ -13,9 +14,9 @@ class Game:
         Constructor method.
         """
         # Player X is always a human
-        self.playerX : Player = Player("X")
+        self.playerX : AbstractPlayer = HumanPlayer("X")
         # Player O may be human or computer, init later
-        self.playerO : Player = None
+        self.playerO : AbstractPlayer = None
 
         # Set board attribute
         self.board : Board = Board()
@@ -41,7 +42,7 @@ class Game:
             match gamemode:
                 case "1":
                     # Init playerO to be a human player, exit loop
-                    self.playerO = Player("O")
+                    self.playerO = HumanPlayer("O")
                     print(StringHolder.PLAYER_MODE)
 
                     break
@@ -84,12 +85,19 @@ class Game:
         self.board.print_board()
 
         
-    def __player_move(self, player: Player) -> None:
+    def __player_move(self, player: AbstractPlayer) -> None:
         """
         Handles logic for player placing move. Facilitates communication between Board and Player
         """
         while True:
-            row_x, col_x = player.make_move()
+            # check if player is AI or user
+            if isinstance(player, AIPlayer):
+                # player is AIPlayer
+                row_x, col_x = player.make_move(self.board)
+            else:
+                # Player is a user
+                row_x, col_x = player.make_move()
+
             try:
                 # Move is valid, exit loop
                 self.board.place_move(row_x, col_x, player.symbol)

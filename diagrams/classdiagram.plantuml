@@ -17,6 +17,11 @@ class StringHolder {
     - ...
 }
 
+class AbstractPlayer {
+    - symbol: str
+    + make_move(board=None: Board)
+}
+
 class Player {
     - team: str
 
@@ -24,7 +29,7 @@ class Player {
 }
 
 class AIPlayer {
-    + make_move(): Tuple[int, int]
+    + make_move(board: Board): Tuple[int, int]
     + determine_move(board: Board): Tuple[int, int]
 }
 
@@ -39,9 +44,10 @@ class Board {
 }
 
 Game o-- Board 
-Game o-- Player
+Game o-- AbstractPlayer
 Game o-- StringHolder
 
-Player <|-- AIPlayer
+AbstractPlayer <|-- Player
+AbstractPlayer <|-- AIPlayer
 
 @enduml

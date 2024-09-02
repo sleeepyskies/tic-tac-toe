@@ -1,6 +1,8 @@
 from utils.StringHolder import StringHolder
+from player.AbstractPlayer import AbstractPlayer
+from board.Board import Board 
 
-class Player:
+class HumanPlayer(AbstractPlayer):
     """
     Represents a user player.
     """
@@ -9,13 +11,10 @@ class Player:
         """
         Constructor method. 
         """
-        # Check player str is valid.
-        if symbol != "X" and symbol != "O":
-            raise ValueError(f"{symbol} is not a valid Symbol.")
-        
-        self.symbol = symbol
+        super().__init__(symbol)
 
-    def make_move(self) -> tuple[int, int]:
+
+    def make_move(self, board: Board | None = None) -> tuple[int, int]:       
         """
         Gets the move the player would like to make from the user. Ensures the input is valid.
         """
@@ -41,7 +40,6 @@ class Player:
                 break
 
         return (row, col)
-
 
     def __check_input(self, value: str) -> bool:
         """
