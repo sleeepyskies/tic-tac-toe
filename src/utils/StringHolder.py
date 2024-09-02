@@ -1,4 +1,4 @@
-class StringHolder:
+class StringHolder():
     """
     Class used to store any string constants used in the game.
     """
