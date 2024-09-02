@@ -1,5 +1,7 @@
-from player.Player import Player 
+from player.Player import Player
+from player.AIPlayer import AIPlayer
 from board.Board import Board
+from utils.StringHolder import StringHolder
 
 class Game:
     """
@@ -23,24 +25,32 @@ class Game:
 
         self.init_game()
     
-    def init_game() -> None:
+    def init_game(self) -> None:
         """
         Used to initialise the game. 
         Determines the game mode to be played
-        and sets up playerO accordingly.
+        and sets up playerO attribute accordingly.
         """
-        print("Welcome to console Tic Tac Toe!")
-        print("Enter 1 to play against another player, and 2 to play against the computer.")
+        print(StringHolder.WELCOME_MESSAGE)
+        print(StringHolder.GAMEMODE_MESSAGE)
 
-        gamemode = input()
-        match gamemode:
-            case "1":
-                print("Playing against another player! \n")
-                return None
-            case "2":
-                print("Playing against the computer! \n")
-                return 
-            case _:
-                print("I'm sorry, you havent entered a valid input :(, exiting the game...) \n")
+        # Loops until valid input has been entered
+        input_valid: bool = False
+        while(not(input_valid)):
+            # Get user input
+            gamemode = input()
+            match gamemode:
+                case "1":
+                    # Init playerO to be a human player
+                    self.playerO = Player()
 
-        print("Player X may begin! \n")
+                    print(StringHolder.PLAYER_MODE)
+                case "2":
+                    # Init playerO to be a computer player
+                    self.playerO = AIPlayer()
+
+                    print(StringHolder.COMPUTER_MODE)
+                case _:
+                    print(StringHolder.INVALID_INPUT)
+
+            print("Player X may begin! \n")
