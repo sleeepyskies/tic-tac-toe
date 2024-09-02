@@ -12,6 +12,11 @@ class Game {
     + end_game(): None
 }
 
+class StringHolder {
+    - welcomeStr: str 
+    - ...
+}
+
 class Player {
     - team: str
 
@@ -35,6 +40,7 @@ class Board {
 
 Game o-- Board 
 Game o-- Player
+Game o-- StringHolder
 
 Player <|-- AIPlayer
 
