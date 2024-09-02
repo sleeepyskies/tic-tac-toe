@@ -13,7 +13,7 @@ class Game:
         Constructor method.
         """
         # Player X is always a human
-        self.playerX : Player = Player()
+        self.playerX : Player = Player("X")
         # Player O may be human or computer, init later
         self.playerO : Player = None
 
@@ -35,22 +35,68 @@ class Game:
         print(StringHolder.GAMEMODE_MESSAGE)
 
         # Loops until valid input has been entered
-        input_valid: bool = False
-        while(not(input_valid)):
+        while True:
             # Get user input
             gamemode = input()
             match gamemode:
                 case "1":
-                    # Init playerO to be a human player
-                    self.playerO = Player()
-
+                    # Init playerO to be a human player, exit loop
+                    self.playerO = Player("O")
                     print(StringHolder.PLAYER_MODE)
-                case "2":
-                    # Init playerO to be a computer player
-                    self.playerO = AIPlayer()
 
+                    break
+                case "2":
+                    # Init playerO to be a computer player, exit loop
+                    self.playerO = AIPlayer("O")
                     print(StringHolder.COMPUTER_MODE)
+
+                    break
                 case _:
                     print(StringHolder.INVALID_INPUT)
 
-            print("Player X may begin! \n")
+    def play_game(self) -> None:
+        """
+        Main game loop. Stops only when the game has been won, or ended in a tie.
+        """
+        while True:
+            # Increment round
+            self.__current_round += 1
+
+            # Print Board
+            self.board.print_board()
+            # Player X move
+            self.__player_move(self.playerX)
+
+            # check if X has won
+            if self.board.game_over():
+                break
+
+            # Print Board
+            self.board.print_board()
+            # Player O move
+            self.__player_move(self.playerO)
+
+            # check if O has won
+            if self.board.game_over():
+                break
+
+        print(StringHolder.game_over(self.__current_round, self.board.get_winner()))
+        self.board.print_board()
+
+        
+    def __player_move(self, player: Player) -> None:
+        """
+        Handles logic for player placing move. Facilitates communication between Board and Player
+        """
+        while True:
+            row_x, col_x = player.make_move()
+            try:
+                # Move is valid, exit loop
+                self.board.place_move(row_x, col_x, player.symbol)
+                break
+            except ValueError as e:
+                # Move is invalid
+                print(StringHolder.INVALID_INPUT + "3")
+
+    def end_game(self) -> None:
+        pass

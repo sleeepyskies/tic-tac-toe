@@ -4,7 +4,7 @@ class Board:
     """
 
     # List of all winning combinations of the game
-    WIN_POSITIONS : list[tuple[int, int, int]] = list[
+    WIN_POSITIONS : list[tuple[int, int, int]] = [
         (0, 1, 2),
         (3, 4, 5),
         (6, 7, 8),
@@ -31,27 +31,29 @@ class Board:
         """
         return self.board.__contains__(" ")
     
-    def place_move(self, column: int, row: int, player: str) -> None:
+    def place_move(self, row: int, column: int, symbol: str) -> None:
         """
         Places the players symbol ("X"/"O") at the given position.
         Throws error if this position is invalid or already taken.
         """ 
         # Check validity of position, throw error if invalid
         if column not in range(3) or row not in range(3):
-            raise ValueError(f"The position {column}, {row} does not exist.")
+            raise ValueError(f"The position {row}, {column} does not exist.")
         
         # Check if position is already taken
-        if self.board[column * 3 + row] != " ":
-            raise ValueError(f"The position {column}, {row} is already taken.")
+        if self.board[row * 3 + column] != " ":
+            raise ValueError(f"The position {row}, {column} is already taken.")
         
         # Update Board
-        self.board[column * 3 + row] = player
+        self.board[row * 3 + column] = symbol
 
     def game_over(self) -> bool:
         """
-        Checks to see if a player has won the game.
+        Checks if the game is over by determining if there's a winner or if no moves are left.
         """
-        return self.get_winner() != " "
+        print(self.get_winner() != " " or not self.move_possible())
+        return self.get_winner() != " " or not self.move_possible()
+
     
     def get_winner(self) -> str:
         """
@@ -61,15 +63,19 @@ class Board:
         # Loop winning combinations, and check if a player has 
         for i, j, k in self.WIN_POSITIONS:
             if self.board[i] == self.board[j] == self.board[k] and self.board[i] != " ":
+                # There is a winner
                 return self.board[i]
+        
+        # No winner yet
+        return " "
 
     def print_board(self) -> None:
         """
         Function used to print the board to the console.
         TODO add fucntionality to render board.
         """
-        for col in range(3):
-            for row in range(3):
-                string_builder = "|"
-                string_builder += self.board[col * 3 + row]
+        for i in range(3):
+            string_builder : str = "|"
+            for j in range(3):
+                string_builder += str(self.board[i*3 + j]) + "|"
             print(string_builder)

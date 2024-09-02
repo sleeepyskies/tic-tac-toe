@@ -20,12 +20,12 @@ class StringHolder {
 class Player {
     - team: str
 
-    + make_move(board: Board): None
+    + make_move(): Tuple[int, int]
 }
 
 class AIPlayer {
-    + make_move(board: Board): None
-    + determine_move(board: Board): (int, int)
+    + make_move(): Tuple[int, int]
+    + determine_move(board: Board): Tuple[int, int]
 }
 
 class Board {
