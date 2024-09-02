@@ -21,11 +21,11 @@ class Game:
         self.board : Board = Board()
 
         # Game starts at round 0
-        current_round : int = 0
+        self.__current_round : int = 0
 
-        self.init_game()
+        self._init_game()
     
-    def init_game(self) -> None:
+    def _init_game(self) -> None:
         """
         Used to initialise the game. 
         Determines the game mode to be played
