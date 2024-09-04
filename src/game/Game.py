@@ -2,7 +2,6 @@ from player.AbstractPlayer import AbstractPlayer
 from player.HumanPlayer import HumanPlayer
 from player.AIPlayer import AIPlayer
 from board.Board import Board
-from renderer.Renderer import Renderer
 from utils.StringHolder import StringHolder
 
 class Game():
@@ -24,8 +23,6 @@ class Game():
 
         # Game starts at round 0
         self.__current_round : int = 0
-
-        self.renderer = Renderer()
 
         self._init_game()
     
